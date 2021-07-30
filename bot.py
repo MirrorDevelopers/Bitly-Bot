@@ -34,7 +34,7 @@ bot = Client(
 )
 
 # Bitly login
-token = Config.BITLY_TOKEN
+token = [Config.BITLY_TOKEN]
 shortener = bitlyshortener.Shortener(tokens=token, max_cache_size=256)
 
 
