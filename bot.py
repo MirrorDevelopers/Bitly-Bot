@@ -46,7 +46,8 @@ async def shorten(_, message):
        output = shortener.shorten_urls(long_url)
     except:
        return await msg.edit("`Error.`")
-    return await msg.edit(*output, sep=", ")
+    link = ''.join(output)
+    return await msg.edit(link)
 
 
 bot.start()
