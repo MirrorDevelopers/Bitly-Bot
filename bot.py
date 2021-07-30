@@ -45,7 +45,7 @@ async def short(_, message):
     try:
        output = shortener.shorten_urls(long_url)
     except:
-       return await msg.edit("`Wrong url.`")
+       return await msg.edit("`https://` is missing.")
     link = ''.join(output)
     return await msg.edit(link)
 
@@ -57,7 +57,7 @@ async def unshort(_, message):
      try:
          output = shortener.shorten_urls(short_url)
      except:
-         return await msg.edit("`Only bit.ly & j.mp links supported.`")
+         return await msg.edit("`https://bit.ly/ & https://j.mp/ links are only supported.`")
      link = ''.join(output)
      return await msg.edit(link)
 
