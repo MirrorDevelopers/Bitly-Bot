@@ -37,9 +37,9 @@ bot = Client(
 token = [Config.BITLY_TOKEN]
 shortener = bitlyshortener.Shortener(tokens=token, max_cache_size=256)
 
-
+# shorten
 @bot.on_message(filters.regex(pattern="https://") & filters.private)
-async def shorten(_, message):
+async def short(_, message):
     long_url = [message.text]
     msg = await message.reply_text("`Shortening url...`")
     try:
@@ -48,6 +48,18 @@ async def shorten(_, message):
        return await msg.edit("`Error.`")
     link = ''.join(output)
     return await msg.edit(link)
+
+# unshorten
+@bot.on_message(filters.regex(pattern=["https://j.mp", "https://bit.ly"]) & filters.private)
+async def unshort(_, message):
+     short_url = [message.text]
+     msg = await message.reply_text("`Unshortening url...`")
+     try:
+         output = shortener.shorten_urls(short_url)
+     except:
+         return await msg.edit("`Error.`")
+     link = ''.join(output)
+     return await msg.edit(link)
 
 
 bot.start()
