@@ -37,29 +37,26 @@ bot = Client(
 token = [Config.BITLY_TOKEN]
 shortener = bitlyshortener.Shortener(tokens=token, max_cache_size=256)
 
-# shorten
+# Function
 @bot.on_message(filters.text & filters.private)
 async def short(_, message):
-    long_url = [message.text]
-    msg = await message.reply_text("`Shortening url...`")
-    try:
-       output = shortener.shorten_urls(long_url)
-    except:
-       return await msg.edit("`https://` is missing.")
-    link = ''.join(output)
-    return await msg.edit(link)
-
-# unshorten
-@bot.on_message(filters.text & filters.private)
-async def unshort(_, message):
-     short_url = [message.text]
-     msg = await message.reply_text("`Unshortening url...`")
-     try:
-         output = shortener.shorten_urls(short_url)
-     except:
-         return await msg.edit("`https://bit.ly/ & https://j.mp/ links are only supported.`")
-     link = ''.join(output)
-     return await msg.edit(link)
+    input = [message.text]
+    if "https://j.mp/" in input or "https://bit.ly" in input:
+       msg = await message.reply_text("`Unshortening url...`")
+       try:
+           output = shortener.shorten_urls(short_url)
+       except:
+           return await msg.edit("`https://bit.ly/ & https://j.mp/ links are only supported.`")
+       link = ''.join(output)
+       return await msg.edit(link)
+    elif "https://" in input:
+       msg = await message.reply_text("`Shortening url...`")
+       try:
+           output = shortener.shorten_urls(long_url)
+       except:
+           return await msg.edit("`Error.`")
+       link = ''.join(output)
+       return await msg.edit(link)
 
 
 bot.start()
