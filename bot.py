@@ -40,7 +40,7 @@ shortener = bitlyshortener.Shortener(tokens=token, max_cache_size=256)
 
 @bot.on_message(filters.regex(pattern="https://") & filters.private)
 async def shorten(_, message):
-    long_url = message.text
+    long_url = [message.text]
     msg = await message.reply_text("`Shortening url...`")
     try:
        output = shortener.shorten_urls(long_url)
