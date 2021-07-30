@@ -42,15 +42,7 @@ shortener = bitlyshortener.Shortener(tokens=token, max_cache_size=256)
 async def short(_, message):
     input = message.text
     input2 = [message.text]
-    if "https://j.mp/" in input or "https://bit.ly" in input:
-       msg = await message.reply_text("`Unshortening url...`")
-       try:
-           output = shortener.shorten_urls(input2)
-       except:
-           return await msg.edit("`https://bit.ly/ & https://j.mp/ links are only supported.`")
-       link = ''.join(output)
-       return await msg.edit(link)
-    elif "https://" in input:
+    if "https://" in input:
        msg = await message.reply_text("`Shortening url...`")
        try:
            output = shortener.shorten_urls(input2)
