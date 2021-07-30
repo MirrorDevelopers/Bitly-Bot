@@ -37,6 +37,17 @@ bot = Client(
 token = [Config.BITLY_TOKEN]
 shortener = bitlyshortener.Shortener(tokens=token, max_cache_size=256)
 
+
+# start msg
+@bot.on_message(filters.command("start") & filters.private)
+async def start(_, message):
+   user = message.from_user.mention
+   return await message.reply_text(f"""Hey {user}, I am **Bitly Bot** ✨
+I can short urls via bit.ly 💥
+Send a long url to shorten it 😇""",
+   reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Source Code 💻", url="https://github.com/ImJanindu/Bitly-Bot")]]))
+
+
 # Function
 @bot.on_message(filters.text & filters.private)
 async def short(_, message):
