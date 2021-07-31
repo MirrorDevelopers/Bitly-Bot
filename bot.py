@@ -49,18 +49,16 @@ Send a long url to shorten it 😇""",
 
 
 # Function
-@bot.on_message(filters.text & filters.private)
+@bot.on_message(filters.regex(pattern="https://") & filters.private)
 async def short(_, message):
-    input = message.text
-    input2 = [message.text]
-    if "https://" in input:
-       msg = await message.reply_text("`Shortening url...`")
-       try:
-           output = shortener.shorten_urls(input2)
-       except:
-           return await msg.edit("`Error.`")
-       link = ''.join(output)
-       return await msg.edit(link)
+    input = [message.text]
+    msg = await message.reply_text("`Shortening url...`")
+    try:
+        output = shortener.shorten_urls(input)
+    except:
+        return await msg.edit("`Error.`")
+    link = ''.join(output)
+    return await msg.edit(link)
 
 
 bot.start()
