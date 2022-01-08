@@ -42,10 +42,10 @@ shortener = bitlyshortener.Shortener(tokens=token, max_cache_size=256)
 @bot.on_message(filters.command("start") & filters.private)
 async def start(_, message):
    user = message.from_user.mention
-   return await message.reply_text(f"""Hey {user}, I am **Bitly Bot** ✨
+   return await message.reply_text(f"""Hey {user}, I am **Link Shortner Bot** ✨
 I can short urls via bit.ly 💥
 Send a long url to shorten it 😇""",
-   reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Source Code 💻", url="https://github.com/ImJanindu/Bitly-Bot")]]))
+   reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Source Code 💻", url="https://youtu.be/dQw4w9WgXcQ")]]))
 
 
 # Function
